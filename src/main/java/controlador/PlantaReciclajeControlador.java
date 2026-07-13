@@ -1,6 +1,5 @@
 
 package controlador;
-
 import modelo.Residuo;
 import vista.PlantaReciclajeVista;
 
@@ -11,23 +10,25 @@ import vista.PlantaReciclajeVista;
  * @author Estudiante de Ingeniería
  * @see vista.PlantaReciclajeVista
  */
-public class PlantaReciclajeControlador {
-    /**
-     * Procesa la entrada de un nuevo residuo, actualiza contenedores y genera logs.
-     * Registra la actividad en el archivo 'recycle.log'.
-     */
-    private void procesarNuevoResiduo() {
-        // ... lógica de control ...
+    public class PlantaReciclajeControlador {
+
+    // 1. Añade aquí tus variables (ajusta los tipos según tu proyecto si es necesario)
+    private PlantaReciclajeVista vista;
+    private java.util.Map<String, Double> nivelesContenedores = new java.util.HashMap<>();
+    private static final String LOG_FILE = "recycle.log";
+    private static final String STATE_FILE = "estado.json";
+    
+
+    // 2. Tu constructor debería ir aquí (para inicializar la vista y cargar los datos)
+    public PlantaReciclajeControlador(PlantaReciclajeVista vista) {
+        this.vista = vista;
+        inicializarContenedores();
+        configurarEventos();
+        cargarEstadoPlanta();
     }
 
-    /**
-     * Guarda el nivel actual de los contenedores en 'estado_planta.json'.
-     * Asegura que los datos sobrevivan al cierre del programa.
-     */
-    private void guardarEstadoPlanta() {
-        // ... lógica de persistencia ...
-    }
-}
+    // El resto de tus métodos continúan igual...
+
     private void inicializarContenedores() {
         nivelesContenedores.put("Plástico", 0.0);
         nivelesContenedores.put("Vidrio", 0.0);

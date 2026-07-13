@@ -1,5 +1,4 @@
 
-Clase: PlantaReciclajeVista.java
 package vista;
 
 import javax.swing.*;
