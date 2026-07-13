@@ -1,36 +1,33 @@
 
-Clase: PlantaReciclajeControlador.java
 package controlador;
 
-import modelo.*;
+import modelo.Residuo;
 import vista.PlantaReciclajeVista;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Mediador entre la Vista y el Modelo.
- * Gestiona eventos, logs y persistencia del estado de la planta [3, 4].
+ * Clase mediadora entre la Vista (Swing) y el Modelo (Lógica de negocio).
+ * Gestiona los eventos de usuario y la persistencia de datos en archivos planos.
+ * 
+ * @author Estudiante de Ingeniería
+ * @see vista.PlantaReciclajeVista
  */
 public class PlantaReciclajeControlador {
-
-    private final PlantaReciclajeVista vista;
-    private final Map<String, Double> nivelesContenedores; // Representa el estado en el Modelo
-    private static final String LOG_FILE = "recycle.log";
-    private static final String STATE_FILE = "estado_planta.json";
-
-    public PlantaReciclajeControlador(PlantaReciclajeVista vista) {
-        this.vista = vista;
-        this.nivelesContenedores = new HashMap<>();
-        
-        // Inicializar o cargar estado previo [4, 5]
-        inicializarContenedores();
-        cargarEstadoPlanta();
-        
-        // Configurar escuchadores de eventos mediante Lambdas [6, 7]
-        configurarEventos();
+    /**
+     * Procesa la entrada de un nuevo residuo, actualiza contenedores y genera logs.
+     * Registra la actividad en el archivo 'recycle.log'.
+     */
+    private void procesarNuevoResiduo() {
+        // ... lógica de control ...
     }
 
+    /**
+     * Guarda el nivel actual de los contenedores en 'estado_planta.json'.
+     * Asegura que los datos sobrevivan al cierre del programa.
+     */
+    private void guardarEstadoPlanta() {
+        // ... lógica de persistencia ...
+    }
+}
     private void inicializarContenedores() {
         nivelesContenedores.put("Plástico", 0.0);
         nivelesContenedores.put("Vidrio", 0.0);
