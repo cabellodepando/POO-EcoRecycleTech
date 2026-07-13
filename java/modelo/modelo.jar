@@ -1,1 +1,46 @@
+package modelo;
 
+public interface IResiduo {
+    String getID();
+    double getPeso();
+    String getTipo();
+}
+
+public abstract class Residuo implements IResiduo {
+    protected String id;
+    protected double peso;
+    
+    public Residuo(String id, double peso) {
+        this.id = id;
+        this.peso = peso;
+    }
+
+    @Override public String getID() { return id; }
+    @Override public double getPeso() { return peso; }
+    public abstract boolean esReciclable(); // Método polimórfico [7]
+}
+public class ResiduoPlastico extends Residuo {
+    public ResiduoPlastico(String id, double peso) { super(id, peso); }
+    @Override public String getTipo() { return "Plástico"; }
+    @Override public boolean esReciclable() { return true; }
+}
+
+public class ResiduoMetal extends Residuo { // Extensibilidad SOLID [6, 8]
+    public ResiduoMetal(String id, double peso) { super(id, peso); }
+    @Override public String getTipo() { return "Metal"; }
+    @Override public boolean esReciclable() { return peso < 50.0; } // Ejemplo de lógica
+}
+public class ResiduoFactory {
+    public static Residuo crearResiduoAleatorio() {
+        String id = "RES-" + System.currentTimeMillis();
+        int tipo = (int) (Math.random() * 4);
+        double peso = Math.random() * 10;
+        
+        return switch (tipo) {
+            case 0 -> new ResiduoPlastico(id, peso);
+            case 1 -> new ResiduoVidrio(id, peso);
+            case 2 -> new ResiduoPapel(id, peso);
+            default -> new ResiduoMetal(id, peso); // Nuevo tipo soportado
+        };
+    }
+}
